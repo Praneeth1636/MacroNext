@@ -1,0 +1,34 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# next
+.next
+out
+
+# misc
+.DS_Store
+*.pem
+.env
+.env*.local
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel
+
+# typescript
+next-env.d.ts
+
+# prisma
+prisma/migrations
+
+# clerk configuration (can include secrets)
+/.clerk/

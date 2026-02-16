@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: macronext-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: macronext
+    ports:
+      - "5432:5432"
+    volumes:
+      - macronext_pgdata:/var/lib/postgresql/data
+
+volumes:
+  macronext_pgdata:

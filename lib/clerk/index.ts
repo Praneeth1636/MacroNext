@@ -1,0 +1,1 @@
+export { clerkAuthAppearance } from "./appearance";

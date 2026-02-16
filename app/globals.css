@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --surface-elevated: #f5f5f5;
+    --border: #e5e5e5;
+    --border-hover: #d4d4d4;
+    --text: #171717;
+    --text-secondary: #737373;
+    --text-tertiary: #a3a3a3;
+    --primary: #6c47ff;
+    --primary-hover: #5b3ae6;
+    --primary-subtle-bg: #f5f3ff;
+    --primary-subtle-border: #e9e5ff;
+    --success: #16a34a;
+    --destructive: #dc2626;
+    --radius-btn: 10px;
+    --radius-card: 16px;
+    --radius-input: 10px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+}
+
+/* Subtle page/card entrance */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-page-enter {
+  animation: pageEnter 0.3s ease-out forwards;
+}
+
+/* Optional faint dot grid (use class .dot-grid on a wrapper) */
+.dot-grid {
+  background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
