@@ -5,18 +5,21 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 
 const features = [
   {
+    step: "01",
     title: "Set your macros",
-    description: "Choose protein, calories, and meal count for tomorrow. One form, done.",
+    description: "Choose protein, calories, and meal count for tomorrow. One form, done. We remember your preferences so you can tweak in seconds.",
     icon: "📋",
   },
   {
+    step: "02",
     title: "Get your plan",
-    description: "We match meals from our catalog to hit your targets. Preview before you confirm.",
+    description: "We match meals from our catalog to hit your targets. Preview every dish and macro breakdown before you confirm.",
     icon: "📄",
   },
   {
+    step: "03",
     title: "Confirm & deliver",
-    description: "Place your order. We prep and deliver in your chosen window.",
+    description: "Place your order in one tap. We prep fresh and deliver in your chosen window. No subscriptions, no lock-in.",
     icon: "🚚",
   },
 ];
@@ -40,7 +43,7 @@ export function LandingFeatures() {
   return (
     <section
       ref={sectionRef}
-      className="mt-12 grid w-full gap-5 md:grid-cols-3"
+      className="mt-24 grid w-full gap-5 md:grid-cols-3"
     >
       {features.map((f, i) => (
         <div
@@ -48,13 +51,16 @@ export function LandingFeatures() {
           className="transition-all duration-300 ease-out"
           style={{
             opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(8px)",
-            transitionDelay: visible ? `${i * 50}ms` : "0ms",
+            transform: visible ? "translateY(0)" : "translateY(16px)",
+            transitionDelay: visible ? `${i * 80}ms` : "0ms",
           }}
         >
-          <Card hover>
+          <Card hover className="min-h-[180px]">
             <CardHeader>
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[#fff7ed] text-[#f97316] text-lg">
+              <p className="text-[11px] font-semibold text-[#a3a3a3] tracking-[0.08em] uppercase mb-1.5">
+                STEP {f.step}
+              </p>
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#fff7ed] text-[#f97316] text-xl shadow-[0_1px_3px_rgba(249,115,22,0.08)]">
                 {f.icon}
               </div>
               <CardTitle className="text-[16px]">{f.title}</CardTitle>

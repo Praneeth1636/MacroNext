@@ -25,6 +25,14 @@
   body {
     background: var(--bg);
     color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: rgba(251, 146, 60, 0.15);
   }
 }
 
@@ -35,6 +43,50 @@
 }
 .animate-page-enter {
   animation: pageEnter 0.3s ease-out forwards;
+}
+
+/* Staggered entrance for child elements */
+@keyframes staggerUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-stagger-up > * {
+  opacity: 0;
+  animation: staggerUp 0.4s ease-out forwards;
+}
+.animate-stagger-up > *:nth-child(1) { animation-delay: 0ms; }
+.animate-stagger-up > *:nth-child(2) { animation-delay: 70ms; }
+.animate-stagger-up > *:nth-child(3) { animation-delay: 140ms; }
+.animate-stagger-up > *:nth-child(4) { animation-delay: 210ms; }
+.animate-stagger-up > *:nth-child(5) { animation-delay: 280ms; }
+.animate-stagger-up > *:nth-child(6) { animation-delay: 350ms; }
+.animate-stagger-up > *:nth-child(7) { animation-delay: 420ms; }
+.animate-stagger-up > *:nth-child(8) { animation-delay: 490ms; }
+
+/* Progress bar fill animation */
+@keyframes barFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.animate-bar-fill {
+  transform-origin: left;
+  animation: barFill 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* Subtle scale-in for modals and popovers */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out forwards;
+}
+
+/* Number count-up shimmer (decorative) */
+@keyframes shimmerOnce {
+  from { background-position: -100% 0; }
+  to { background-position: 200% 0; }
 }
 
 /* Optional faint dot grid (use class .dot-grid on a wrapper) */

@@ -72,14 +72,23 @@ export default async function DashboardPage() {
         ? (order.generatedMeals as { name: string; servings?: number; calories?: number }[])
         : [];
 
+    const hour = new Date().getHours();
+    const greeting =
+      hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
     return (
-      <div className="space-y-8 animate-page-enter">
-        <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#171717] font-display">Dashboard</h1>
+      <div className="space-y-8 animate-stagger-up">
+        <div>
+          <h1 className="text-[28px] font-bold tracking-[-0.02em] text-[#171717] font-display">
+            {greeting} 👋
+          </h1>
+          <p className="text-[14px] text-[#737373] mt-1">Here&apos;s your plan for tomorrow</p>
+        </div>
 
         <MacroRings plan={plan} order={order} />
 
         <div className="grid gap-6 md:grid-cols-2">
-          <Card hover accent>
+          <Card hover accent accentVariant="orange">
             <CardHeader>
               <CardTitle>Tomorrow&apos;s macros</CardTitle>
               <CardDescription>
@@ -106,7 +115,7 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card hover accent>
+          <Card hover accent accentVariant="purple">
             <CardHeader>
               <CardTitle>Tomorrow&apos;s order</CardTitle>
               <CardDescription>
@@ -134,7 +143,9 @@ export default async function DashboardPage() {
           </Card>
         </div>
 
-        <MealsListCard meals={meals} orderDate={order?.date} />
+        <div className="border-t border-[#f0f0f0] pt-8 mt-2">
+          <MealsListCard meals={meals} orderDate={order?.date} />
+        </div>
 
         <QuickAddSection />
       </div>

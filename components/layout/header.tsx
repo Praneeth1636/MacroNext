@@ -5,6 +5,7 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const AUTH_PATHS = ["/login", "/register", "/forgot-password", "/verify-email", "/logout"];
 
@@ -34,7 +35,7 @@ export function Header() {
       <div className="mx-auto flex max-w-5xl w-full items-center justify-between">
         <Link
           href={isApp ? "/app" : isAdmin ? "/admin/orders" : "/"}
-          className="font-display text-[20px] font-extrabold text-[#171717] tracking-tight"
+          className="font-display text-[20px] font-extrabold text-[#171717] tracking-tight hover:text-[#fb923c] transition-colors duration-200"
         >
           MacroNext
         </Link>
@@ -42,21 +43,19 @@ export function Header() {
           <div className="flex items-center gap-4">
             <Link
               href="/pricing"
-              className="text-[14px] font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 px-2 py-1.5 rounded-md"
+              className="text-[14px] font-medium text-[#737373] hover:text-[#171717] hover:bg-[#f5f5f5] transition-colors duration-150 px-2 py-1.5 rounded-md"
             >
               Pricing
             </Link>
             <Link
               href="/login"
-              className="text-[14px] font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 px-2 py-1.5 rounded-md"
+              className="text-[14px] font-medium text-[#737373] hover:text-[#171717] hover:bg-[#f5f5f5] transition-colors duration-150 px-2 py-1.5 rounded-md"
             >
               Log in
             </Link>
-            <Link
-              href="/register"
-              className="inline-flex items-center justify-center font-semibold text-[14px] rounded-[10px] px-5 py-2.5 bg-[#fb923c] text-white shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:bg-[#f97316] hover:shadow-[0_4px_12px_rgba(249,115,22,0.2)] hover:-translate-y-px active:scale-[0.995] transition-all duration-150"
-            >
-              Get started
+            <div className="h-5 w-px bg-[#e5e5e5]" />
+            <Link href="/register">
+              <Button size="sm">Get started</Button>
             </Link>
           </div>
         </SignedOut>
@@ -71,7 +70,7 @@ export function Header() {
                   <NavLink href="/app/orders" label="Orders" active={pathname?.startsWith("/app/orders")} />
                   <Link
                     href="/admin/orders"
-                    className="text-[14px] font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 px-3 py-2 rounded-md"
+                    className="text-[14px] font-medium text-[#737373] hover:text-[#171717] hover:bg-[#f5f5f5] transition-colors duration-150 px-3 py-2 rounded-md"
                   >
                     Admin
                   </Link>
@@ -80,7 +79,7 @@ export function Header() {
               {isAdmin && (
                 <Link
                   href="/app"
-                  className="text-[14px] font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 px-3 py-2 rounded-md"
+                  className="text-[14px] font-medium text-[#737373] hover:text-[#171717] hover:bg-[#f5f5f5] transition-colors duration-150 px-3 py-2 rounded-md"
                 >
                   App
                 </Link>
@@ -88,12 +87,13 @@ export function Header() {
               {!isApp && !isAdmin && (
                 <Link
                   href="/app"
-                  className="text-[14px] font-medium text-[#737373] hover:text-[#171717] transition-colors duration-150 px-3 py-2 rounded-md"
+                  className="text-[14px] font-medium text-[#737373] hover:text-[#171717] hover:bg-[#f5f5f5] transition-colors duration-150 px-3 py-2 rounded-md"
                 >
                   Dashboard
                 </Link>
               )}
             </nav>
+            <div className="h-5 w-px bg-[#e5e5e5]" />
             <UserButton
               afterSignOutUrl="/"
               appearance={{
@@ -122,8 +122,8 @@ function NavLink({
       className={cn(
         "text-[14px] font-medium transition-colors duration-150 px-3 py-2 rounded-md border-b-2 -mb-px",
         active
-          ? "text-[#171717] border-[#6c47ff]"
-          : "text-[#737373] border-transparent hover:text-[#171717]"
+          ? "text-[#171717] border-[#fb923c] bg-[#fff7ed]"
+          : "text-[#737373] border-transparent hover:text-[#171717] hover:bg-[#f5f5f5]"
       )}
     >
       {label}

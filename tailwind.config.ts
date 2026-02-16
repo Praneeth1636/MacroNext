@@ -8,6 +8,8 @@ export default {
   ],
   theme: {
     extend: {
+      transitionDuration: { DEFAULT: "200ms" },
+      transitionTimingFunction: { DEFAULT: "ease" },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         display: ["var(--font-plus-jakarta)", "var(--font-inter)", "system-ui", "sans-serif"],
@@ -21,7 +23,13 @@ export default {
         "text-primary": "#171717",
         "text-secondary": "#737373",
         "text-tertiary": "#a3a3a3",
-        primary: { DEFAULT: "#6c47ff", hover: "#5b3ae6" },
+        primary: {
+          DEFAULT: "#fb923c",
+          hover: "#f97316",
+          light: "#fff7ed",
+          border: "#fed7aa",
+          dark: "#ea580c",
+        },
         "primary-subtle": { bg: "#f5f3ff", border: "#e9e5ff" },
         success: "#16a34a",
         destructive: "#dc2626",

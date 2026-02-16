@@ -10,6 +10,13 @@ const macros = [
   { key: "fat", label: "Fat", primary: false },
 ] as const;
 
+const barColors: Record<string, string> = {
+  calories: "bg-[#fb923c]",
+  protein: "bg-[#6c47ff]",
+  carbs: "bg-[#0ea5e9]",
+  fat: "bg-[#8b5cf6]",
+};
+
 export function MacroRings({
   plan,
   order,
@@ -57,22 +64,29 @@ export function MacroRings({
           key={m.key}
           className={cn(
             "rounded-[16px] border border-[#e5e5e5] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04)]",
-            m.primary && "border-b-2 border-b-[#6c47ff]"
+            m.primary && "border-b-2 border-b-[#fb923c] bg-gradient-to-b from-white to-[#fffbf5]"
           )}
         >
           <p className="text-[28px] font-bold text-[#171717] font-display tabular-nums">
             {percents[i]}%
           </p>
           <p className="text-[13px] font-medium text-[#a3a3a3] mt-0.5">{m.label}</p>
-          <div className="mt-3 h-1.5 w-full rounded-full bg-[#f0f0f0] overflow-hidden">
+          <div className="mt-3 h-2 w-full rounded-full bg-[#f0f0f0] overflow-hidden">
             <div
-              className="h-full rounded-full bg-[#6c47ff] transition-[width] duration-500 ease-out"
+              className={cn(
+                "h-full rounded-full transition-[width] duration-500 ease-out animate-bar-fill",
+                barColors[m.key]
+              )}
               style={{ width: mounted ? `${percents[i]}%` : "0%" }}
             />
           </div>
+          <p className="text-[11px] text-[#a3a3a3] mt-1 tabular-nums">
+            {values[m.key]}
+            {m.key !== "calories" ? "g" : ""} / {targets[m.key]}
+            {m.key !== "calories" ? "g" : " cal"}
+          </p>
         </div>
       ))}
     </div>
   );
 }
-

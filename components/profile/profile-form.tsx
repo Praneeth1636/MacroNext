@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { Profile, Goal, DietType, DeliveryWindow } from "@prisma/client";
 
-const inputClass =
-  "w-full rounded-[10px] border border-[#e5e5e5] bg-white px-4 py-3 text-[14px] text-[#171717] placeholder:text-[#a3a3a3] focus:outline-none focus:border-[#6c47ff] focus:ring-[3px] focus:ring-[rgba(108,71,255,0.1)] transition-all duration-150";
+const selectClass =
+  "w-full rounded-[10px] border border-[#e5e5e5] bg-white px-4 py-3 pr-10 text-[14px] text-[#171717] appearance-none cursor-pointer bg-no-repeat bg-[right_12px_center] focus:outline-none focus:border-[#fb923c] focus:ring-[3px] focus:ring-[rgba(251,146,60,0.12)] transition-all duration-150 mt-1.5";
+const selectChevron =
+  "bg-[url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"%23a3a3a3\" stroke-width=\"2\"%3E%3Cpath d=\"M6 9l6 6 6-6\"/%3E%3C/svg%3E')]";
 
 const goals: { value: Goal; label: string }[] = [
   { value: "CUT", label: "Cut" },
@@ -38,18 +40,31 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
         <CardDescription>Goal, diet, allergies, and delivery address</CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={saveProfile} className="space-y-5">
+        <form action={saveProfile} className="space-y-5 animate-stagger-up">
+          <p className="text-[11px] font-semibold text-[#a3a3a3] uppercase tracking-[0.08em]">
+            Health & Diet
+          </p>
           <div>
-            <Label>Goal</Label>
-            <select name="goal" defaultValue={profile?.goal ?? "MAINTAIN"} className={inputClass + " mt-1.5"}>
+            <Label htmlFor="goal">Goal</Label>
+            <select
+              id="goal"
+              name="goal"
+              defaultValue={profile?.goal ?? "MAINTAIN"}
+              className={`${selectClass} ${selectChevron}`}
+            >
               {goals.map((g) => (
                 <option key={g.value} value={g.value}>{g.label}</option>
               ))}
             </select>
           </div>
           <div>
-            <Label>Diet type</Label>
-            <select name="dietType" defaultValue={profile?.dietType ?? "NONVEG"} className={inputClass + " mt-1.5"}>
+            <Label htmlFor="dietType">Diet type</Label>
+            <select
+              id="dietType"
+              name="dietType"
+              defaultValue={profile?.dietType ?? "NONVEG"}
+              className={`${selectClass} ${selectChevron}`}
+            >
               {dietTypes.map((d) => (
                 <option key={d.value} value={d.value}>{d.label}</option>
               ))}
@@ -59,6 +74,12 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
             <Label htmlFor="allergies">Allergies (comma-separated)</Label>
             <Input id="allergies" name="allergies" defaultValue={profile?.allergies?.join(", ") ?? ""} placeholder="e.g. nuts, shellfish" className="mt-1.5" />
           </div>
+
+          <div className="border-t border-[#f0f0f0] pt-5 mt-6">
+            <p className="text-[11px] font-semibold text-[#a3a3a3] uppercase tracking-[0.08em] mb-4">
+              Delivery
+            </p>
+            <div className="space-y-5">
           <div>
             <Label htmlFor="addressLine1">Address line 1</Label>
             <Input id="addressLine1" name="addressLine1" defaultValue={profile?.addressLine1 ?? ""} required className="mt-1.5" />
@@ -78,14 +99,23 @@ export function ProfileForm({ profile }: { profile: Profile | null }) {
             <Input id="zip" name="zip" defaultValue={profile?.zip ?? ""} required className="mt-1.5" />
           </div>
           <div>
-            <Label>Delivery window</Label>
-            <select name="deliveryWindow" defaultValue={profile?.deliveryWindow ?? "AFTERNOON"} className={inputClass + " mt-1.5"}>
+            <Label htmlFor="deliveryWindow">Delivery window</Label>
+            <select
+              id="deliveryWindow"
+              name="deliveryWindow"
+              defaultValue={profile?.deliveryWindow ?? "AFTERNOON"}
+              className={`${selectClass} ${selectChevron}`}
+            >
               {windows.map((w) => (
                 <option key={w.value} value={w.value}>{w.label}</option>
               ))}
             </select>
           </div>
-          <Button type="submit">Save profile</Button>
+            </div>
+          </div>
+          <Button type="submit" className="w-full sm:w-auto">
+            Save profile
+          </Button>
         </form>
       </CardContent>
     </Card>
